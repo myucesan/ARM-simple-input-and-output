@@ -1,8 +1,10 @@
 #include "LPC13xx.h"
 #include "delay.h"
 
-#define GPIO3DIR    *(volatile uint32_t *)0x50038000
-#define GPIO3DATA   *(volatile uint32_t *)0x50033FFC
+
+// LPC_GPIO3 is defined in LPC12xx.h. It uses a struct which has the DIR and DATA items. 
+#define GPIO3DIR    LPC_GPIO3->DIR
+#define GPIO3DATA   LPC_GPIO3->DATA
 static void init (void) {
     // LED_0 is PIO3_0
         GPIO3DIR |= (1 << 0); // Selectively set bit to 1, marking GPIO3 as output. If to 0, it would be input. 1 << 0 = 001
